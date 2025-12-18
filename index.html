@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Video Sequence</title>
+    <title>Video Sequence with Sound</title>
     <style>
         body, html { margin: 0; padding: 0; height: 100%; overflow: hidden; background: black; }
         video { width: 100vw; height: 100vh; object-fit: cover; cursor: pointer; }
@@ -19,26 +19,22 @@
         const player = document.getElementById('videoPlayer');
         const source = document.getElementById('videoSource');
         
-        // Track which video we are on
         let currentStep = 1;
 
-        // 1. Logic for when a video ends naturally
         player.onended = function() {
             if (currentStep === 1) {
-                // If video 1 ends, loop it back to the start
                 player.play();
             } else if (currentStep === 2) {
-                // If video 2 ends, move to video 3 automatically
                 playVideo3();
             } else if (currentStep === 3) {
-                // If video 3 ends, loop it
                 player.play();
             }
         };
 
-        // 2. Logic for when the user clicks
         function handleInteraction() {
             if (currentStep === 1) {
+                // UNMUTE here: Browser allows sound now because the user clicked
+                player.muted = false; 
                 playVideo2();
             }
         }
